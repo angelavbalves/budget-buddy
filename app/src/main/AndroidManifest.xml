@@ -21,6 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ListDetailsActivity"
+            android:exported="false"
+            android:parentActivityName="com.example.budget_buddy.MainActivity"/>
     </application>
 
 </manifest>

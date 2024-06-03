@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.budget_buddy.presentation.fragments.FinanceHomeFragment"
+        android:label="FinanceHomeFragment"
+        tools:layout="@layout/fragment_finance_home">
+        <action
+            android:id="@+id/action_financeHomeFragment_to_add_item"
+            app:destination="@id/addItem" />
+        <action
+            android:id="@+id/action_financeHomeFragment_to_listDetailsActivity"
+            app:destination="@id/listDetailsActivity" />
+    </fragment>
+        <activity
+            android:id="@+id/listDetailsActivity"
+            android:name="com.example.budget_buddy.ListDetailsActivity"
+            android:label="ListDetailsActivity"
+            tools:layout="@layout/finance_list_item"
+            />
+    <fragment
+        android:id="@+id/addItem"
+        android:name="com.example.budget_buddy.presentation.fragments.AddItemFragment"
+        android:label="AddItemFragment"
+        tools:layout="@layout/fragment_add_item" >
+        <action
+            android:id="@+id/action_addItem_to_financeHomeFragment"
+            app:destination="@id/addItem" />
+    </fragment>
+</navigation>
