@@ -1,0 +1,70 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="itemIncome"
+            type="com.example.budget_buddy.presentation.data.models.FinanceTypePresentation" />
+        <variable
+            name="itemExpense"
+            type="com.example.budget_buddy.presentation.data.models.FinanceTypePresentation" />
+        <variable
+            name="itemFutureExpense"
+            type="com.example.budget_buddy.presentation.data.models.FinanceTypePresentation" />
+        <variable
+            name="itemInvestment"
+            type="com.example.budget_buddy.presentation.data.models.FinanceTypePresentation" />
+        <variable
+            name="resourcesProvider"
+            type="com.example.budget_buddy.presentation.providers.ResourcesProvider" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
+
+        <include
+            android:id="@+id/layoutIncome"
+            layout="@layout/fragment_add_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:item="@{itemIncome}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:resourcesProvider="@{resourcesProvider}"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/layoutExpense"
+            layout="@layout/fragment_add_item"
+            android:layout_marginTop="22dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:item="@{itemExpense}"
+            app:resourcesProvider="@{resourcesProvider}"
+            app:layout_constraintTop_toBottomOf="@id/layoutIncome" />
+
+        <include
+            android:id="@+id/layoutFutureExpense"
+            layout="@layout/fragment_add_item"
+            android:layout_marginTop="22dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:item="@{itemFutureExpense}"
+            app:resourcesProvider="@{resourcesProvider}"
+            app:layout_constraintTop_toBottomOf="@id/layoutExpense" />
+
+        <include
+            android:id="@+id/layoutInvestment"
+            layout="@layout/fragment_add_item"
+            android:layout_marginTop="22dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:item="@{itemInvestment}"
+            app:resourcesProvider="@{resourcesProvider}"
+            app:layout_constraintTop_toBottomOf="@id/layoutFutureExpense" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

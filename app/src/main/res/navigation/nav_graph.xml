@@ -17,19 +17,29 @@
             android:id="@+id/action_financeHomeFragment_to_listDetailsActivity"
             app:destination="@id/listDetailsActivity" />
     </fragment>
-        <activity
-            android:id="@+id/listDetailsActivity"
-            android:name="com.example.budget_buddy.ListDetailsActivity"
-            android:label="ListDetailsActivity"
-            tools:layout="@layout/finance_list_item"
-            />
+
+    <activity
+        android:id="@+id/listDetailsActivity"
+        android:name="com.example.budget_buddy.ListDetailsActivity"
+        android:label="ListDetailsActivity"
+        tools:layout="@layout/finance_list_item" />
+
     <fragment
         android:id="@+id/addItem"
         android:name="com.example.budget_buddy.presentation.fragments.AddItemFragment"
         android:label="AddItemFragment"
-        tools:layout="@layout/fragment_add_item" >
+        tools:layout="@layout/fragment_add_item">
+        <action
+            android:id="@+id/action_addItem_to_addItemDetails"
+            app:destination="@id/addItemDetailsFragment" />
         <action
             android:id="@+id/action_addItem_to_financeHomeFragment"
-            app:destination="@id/addItem" />
+            app:destination="@id/homeFragment" />
     </fragment>
+
+    <dialog
+        android:id="@+id/addItemDetailsFragment"
+        android:name="com.example.budget_buddy.presentation.fragments.AddDetailsBottomSheetFragment"
+        android:label="Add Item Details"
+        tools:layout="@layout/fragment_add_details" />
 </navigation>

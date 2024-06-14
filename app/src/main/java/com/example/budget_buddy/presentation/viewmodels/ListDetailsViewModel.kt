@@ -7,8 +7,9 @@ import com.example.budget_buddy.data.models.FinanceItemList
 import com.example.budget_buddy.data.models.FinanceType
 import com.example.budget_buddy.presentation.data.mappers.toPresentation
 import com.example.budget_buddy.presentation.data.models.FinanceItemListPresentation
+import com.example.budget_buddy.presentation.providers.ResourcesProvider
 
-class ListDetailsViewModel(val context: Context) : ViewModel() {
+class ListDetailsViewModel(val resourcesProvider: ResourcesProvider) : ViewModel() {
     private val financeItems = listOf(
         FinanceItemList(
             title = "Balanço total",
@@ -102,15 +103,15 @@ class ListDetailsViewModel(val context: Context) : ViewModel() {
     )
 
     fun getForType(type: FinanceType): List<FinanceItemListPresentation> {
-        return financeItems.filter { it.financeType == type }.map { it.toPresentation(context) }
+        return financeItems.filter { it.financeType == type }.map { it.toPresentation(resourcesProvider) }
     }
 }
 
-class ListDetailsViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
+class ListDetailsViewModelFactory(private val resourcesProvider: ResourcesProvider) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ListDetailsViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return ListDetailsViewModel(context) as T
+            return ListDetailsViewModel(resourcesProvider) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

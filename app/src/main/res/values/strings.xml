@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">budget-buddy</string>
     <string name="header_title">Bem vindo de volta!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="editar_item">Editar item</string>
 </resources>

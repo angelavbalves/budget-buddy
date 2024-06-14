@@ -12,6 +12,7 @@ import com.example.budget_buddy.R
 import com.example.budget_buddy.data.models.FinanceType
 import com.example.budget_buddy.databinding.FragmentFinanceHomeBinding
 import com.example.budget_buddy.presentation.adapters.FinanceCardAdapter
+import com.example.budget_buddy.presentation.providers.ResourcesProvider
 import com.example.budget_buddy.presentation.viewmodels.MainViewModel
 import com.example.budget_buddy.presentation.viewmodels.MainViewModelFactory
 
@@ -28,7 +29,8 @@ class FinanceHomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val factory = MainViewModelFactory(requireContext().applicationContext)
+        val resourcesProvider = ResourcesProvider(requireContext())
+        val factory = MainViewModelFactory(resourcesProvider)
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
 
         val rc = binding.rcFinanceCardHome

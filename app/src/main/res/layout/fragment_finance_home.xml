@@ -7,7 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity"
-        android:layout_margin="20dp">
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/white">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcFinanceCardHome"
             android:layout_width="match_parent"

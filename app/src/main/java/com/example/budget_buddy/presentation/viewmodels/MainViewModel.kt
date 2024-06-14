@@ -9,8 +9,9 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.budget_buddy.data.models.FinanceItemHome
 import com.example.budget_buddy.data.models.FinanceType
 import com.example.budget_buddy.presentation.data.mappers.toPresentation
+import com.example.budget_buddy.presentation.providers.ResourcesProvider
 
-class MainViewModel(val context: Context) : ViewModel() {
+class MainViewModel(private val resourcesProvider: ResourcesProvider) : ViewModel() {
     val financeItems = listOf(
         FinanceItemHome(
             title = "Balanço total",
@@ -37,14 +38,14 @@ class MainViewModel(val context: Context) : ViewModel() {
             balance = 5.000,
             type = FinanceType.FutureExpense
         ),
-    ).map { it.toPresentation(context = context) }
+    ).map { it.toPresentation(resourcesProvider = resourcesProvider) }
 }
 
-class MainViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
+class MainViewModelFactory(private val resourcesProvider: ResourcesProvider) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return MainViewModel(context) as T
+            return MainViewModel(resourcesProvider) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

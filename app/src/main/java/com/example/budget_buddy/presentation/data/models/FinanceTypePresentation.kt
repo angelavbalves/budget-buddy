@@ -1,11 +1,10 @@
 package com.example.budget_buddy.presentation.data.models
 
-import android.content.Context
 import android.graphics.drawable.Drawable
-import androidx.core.content.ContextCompat
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.example.budget_buddy.R
+import com.example.budget_buddy.presentation.providers.ResourcesProvider
 
 enum class FinanceTypePresentation(
     val title: String,
@@ -18,11 +17,11 @@ enum class FinanceTypePresentation(
     Investment("Investimentos", R.color.pink, R.drawable.invest),
     FutureExpense("Gastos Futuros", R.color.purple, R.drawable.future_expense);
 
-    fun getColor(context: Context): Int {
-        return ContextCompat.getColor(context, colorResId)
+    fun getColor(resourcesProvider: ResourcesProvider): Int {
+        return resourcesProvider.getColor(colorResId)
     }
 
-    fun getIcon(context: Context): Drawable? {
-        return iconResId?.let { ContextCompat.getDrawable(context, it) }
+    fun getIcon(resourcesProvider: ResourcesProvider): Drawable? {
+        return iconResId?.let { resourcesProvider.getDrawable(it) }
     }
 }

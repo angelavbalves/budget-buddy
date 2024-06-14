@@ -29,18 +29,23 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="financeHomeFragment">
+                  <entry key="homeFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-274" />
-                            <option name="y" value="-166" />
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_financeHomeFragment_to_add_item">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_financeHomeFragment_to_listDetailsActivity">
                               <value>
                                 <LayoutPositions />
                               </value>

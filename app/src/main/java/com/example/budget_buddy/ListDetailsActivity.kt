@@ -7,6 +7,7 @@ import com.example.budget_buddy.data.models.FinanceType
 import com.example.budget_buddy.databinding.FragmentFinanceListBinding
 import com.example.budget_buddy.presentation.adapters.FinanceItemAdapter
 import com.example.budget_buddy.presentation.data.models.FinanceItemListPresentation
+import com.example.budget_buddy.presentation.providers.ResourcesProvider
 import com.example.budget_buddy.presentation.viewmodels.ListDetailsViewModel
 import com.example.budget_buddy.presentation.viewmodels.ListDetailsViewModelFactory
 
@@ -21,8 +22,11 @@ class ListDetailsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val financeType = intent.extras?.getSerializable("data") as? FinanceType
-        val factory = ListDetailsViewModelFactory(this.applicationContext)
+        val resourcesProvider = ResourcesProvider(applicationContext)
+        val factory = ListDetailsViewModelFactory(resourcesProvider)
+
         viewModel = ViewModelProvider(this, factory).get(ListDetailsViewModel::class.java)
+
         val toolBar = binding.toolbar
         setSupportActionBar(toolBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
