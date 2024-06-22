@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        app:cardBackgroundColor="@android:color/white"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp">
 
@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/black"
+                android:layout_marginStart="16dp"
                 android:textSize="16sp"
                 android:text="@{item.title}"
                 app:layout_constraintStart_toEndOf="@id/imgIcon"

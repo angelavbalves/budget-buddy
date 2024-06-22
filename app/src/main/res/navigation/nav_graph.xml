@@ -11,11 +11,11 @@
         android:label="FinanceHomeFragment"
         tools:layout="@layout/fragment_finance_home">
         <action
-            android:id="@+id/action_financeHomeFragment_to_add_item"
-            app:destination="@id/addItem" />
-        <action
             android:id="@+id/action_financeHomeFragment_to_listDetailsActivity"
             app:destination="@id/listDetailsActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_addItemFragment"
+            app:destination="@id/addItemFragment" />
     </fragment>
 
     <activity
@@ -25,13 +25,19 @@
         tools:layout="@layout/finance_list_item" />
 
     <fragment
-        android:id="@+id/addItem"
+        android:id="@+id/addItemFragment"
         android:name="com.example.budget_buddy.presentation.fragments.AddItemFragment"
         android:label="AddItemFragment"
         tools:layout="@layout/fragment_add_item">
+
         <action
             android:id="@+id/action_addItem_to_addItemDetails"
-            app:destination="@id/addItemDetailsFragment" />
+            app:destination="@id/addItemDetailsFragment">
+            <argument
+                android:name="financeType"
+                app:argType="string" />
+        </action>
+
         <action
             android:id="@+id/action_addItem_to_financeHomeFragment"
             app:destination="@id/homeFragment" />
@@ -40,6 +46,14 @@
     <dialog
         android:id="@+id/addItemDetailsFragment"
         android:name="com.example.budget_buddy.presentation.fragments.AddDetailsBottomSheetFragment"
-        android:label="Add Item Details"
-        tools:layout="@layout/fragment_add_details" />
+        android:label="AddItemDetails"
+        tools:layout="@layout/fragment_add_details">
+    <action
+        android:id="@+id/action_addItemDetailsFragment_to_listActivity"
+        app:destination="@id/listDetailsActivity">
+        <argument
+            android:name="financeType"
+            app:argType="string" />
+    </action>
+    </dialog>
 </navigation>

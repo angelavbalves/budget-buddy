@@ -23,6 +23,7 @@ public class LibrariesForLibsInPluginsBlock extends AbstractExternalDependencyFa
 
     private final AbstractExternalDependencyFactory owner = this;
     private final AndroidxLibraryAccessors laccForAndroidxLibraryAccessors = new AndroidxLibraryAccessors(owner);
+    private final JavaxLibraryAccessors laccForJavaxLibraryAccessors = new JavaxLibraryAccessors(owner);
     private final VersionAccessors vaccForVersionAccessors = new VersionAccessors(providers, config);
     private final BundleAccessors baccForBundleAccessors = new BundleAccessors(objects, providers, config, attributesFactory, capabilityNotationParser);
     private final PluginAccessors paccForPluginAccessors = new PluginAccessors(providers, config);
@@ -62,6 +63,16 @@ public class LibrariesForLibsInPluginsBlock extends AbstractExternalDependencyFa
     public AndroidxLibraryAccessors getAndroidx() {
         org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
         return laccForAndroidxLibraryAccessors;
+    }
+
+    /**
+     * Returns the group of libraries at javax
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public JavaxLibraryAccessors getJavax() {
+        org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+        return laccForJavaxLibraryAccessors;
     }
 
     /**
@@ -206,6 +217,27 @@ public class LibrariesForLibsInPluginsBlock extends AbstractExternalDependencyFa
 
     }
 
+    /**
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public static class JavaxLibraryAccessors extends SubDependencyFactory {
+
+        public JavaxLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+            /**
+             * Creates a dependency provider for inject (javax.inject:javax.inject)
+             * This dependency was declared in catalog libs.versions.toml
+         * @deprecated Will be removed in Gradle 9.0.
+             */
+        @Deprecated
+            public Provider<MinimalExternalModuleDependency> getInject() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+                return create("javax.inject");
+        }
+
+    }
+
     public static class VersionAccessors extends VersionFactory  {
 
         public VersionAccessors(ProviderFactory providers, DefaultVersionCatalog config) { super(providers, config); }
@@ -257,6 +289,14 @@ public class LibrariesForLibsInPluginsBlock extends AbstractExternalDependencyFa
              * This version was declared in catalog libs.versions.toml
              */
             public Provider<String> getEspressoCore() { return getVersion("espressoCore"); }
+
+            /**
+             * Returns the version associated to this alias: javaxInject (1)
+             * If the version is a rich version and that its not expressible as a
+             * single version string, then an empty string is returned.
+             * This version was declared in catalog libs.versions.toml
+             */
+            public Provider<String> getJavaxInject() { return getVersion("javaxInject"); }
 
             /**
              * Returns the version associated to this alias: junit (4.13.2)

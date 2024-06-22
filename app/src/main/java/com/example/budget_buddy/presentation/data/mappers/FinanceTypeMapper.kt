@@ -10,4 +10,5 @@ fun FinanceType.toPresentation() : FinanceTypePresentation =
         FinanceType.Investment -> FinanceTypePresentation.Investment
         FinanceType.Expense -> FinanceTypePresentation.Expense
         FinanceType.FutureExpense -> FinanceTypePresentation.FutureExpense
+        FinanceType.Unknown -> FinanceTypePresentation.Unknown
     }

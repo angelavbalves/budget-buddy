@@ -10,9 +10,10 @@ data class FinanceItemHome(
 )
 
 enum class FinanceType(val title: String) : Serializable {
-    Balance("Balanço Total"),
+    Balance("Balanço"),
     Income("Receitas"),
     Expense("Despesas"),
     Investment("Investimentos"),
-    FutureExpense("Gastos Futuros")
+    FutureExpense("Gastos Futuros"),
+    Unknown("")
 }

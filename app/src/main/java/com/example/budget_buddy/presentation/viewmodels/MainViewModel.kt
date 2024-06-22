@@ -1,52 +1,83 @@
-package com.example.budget_buddy.presentation.viewmodels
+    package com.example.budget_buddy.presentation.viewmodels
 
-import android.content.Context
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
-import androidx.lifecycle.createSavedStateHandle
-import androidx.lifecycle.viewmodel.CreationExtras
-import com.example.budget_buddy.data.models.FinanceItemHome
-import com.example.budget_buddy.data.models.FinanceType
-import com.example.budget_buddy.presentation.data.mappers.toPresentation
-import com.example.budget_buddy.presentation.providers.ResourcesProvider
+    import androidx.lifecycle.MutableLiveData
+    import androidx.lifecycle.ViewModel
+    import androidx.lifecycle.ViewModelProvider
+    import androidx.lifecycle.viewModelScope
+    import com.example.budget_buddy.commons.utils.FinanceResult
+    import com.example.budget_buddy.data.models.FinanceType
+    import com.example.budget_buddy.data.repositories.FinanceItemRepository
+    import com.example.budget_buddy.presentation.data.mappers.toMoney
+    import com.example.budget_buddy.presentation.data.mappers.toPresentation
+    import com.example.budget_buddy.presentation.data.models.FinanceItemHomePresentation
+    import com.example.budget_buddy.presentation.providers.ResourcesProvider
+    import dagger.hilt.android.lifecycle.HiltViewModel
+    import kotlinx.coroutines.Dispatchers
+    import kotlinx.coroutines.delay
+    import kotlinx.coroutines.invoke
+    import kotlinx.coroutines.launch
+    import javax.inject.Inject
 
-class MainViewModel(private val resourcesProvider: ResourcesProvider) : ViewModel() {
-    val financeItems = listOf(
-        FinanceItemHome(
-            title = "Balanço total",
-            balance = 0.000,
-            type = FinanceType.Balance
-        ),
-        FinanceItemHome(
-            title = "Receitas",
-            balance = 5.000,
-            type = FinanceType.Income
-        ),
-        FinanceItemHome(
-            title = "Despesas",
-            balance = 5.000,
-            type = FinanceType.Expense
-        ),
-        FinanceItemHome(
-            title = "Investimetnos",
-            balance = 5.000,
-            type = FinanceType.Investment
-        ),
-        FinanceItemHome(
-            title = "Futuros Gastos",
-            balance = 5.000,
-            type = FinanceType.FutureExpense
-        ),
-    ).map { it.toPresentation(resourcesProvider = resourcesProvider) }
-}
+    @HiltViewModel
+    class MainViewModel @Inject constructor(
+        private val repository: FinanceItemRepository,
+        private val resourcesProvider: ResourcesProvider
+    ) : ViewModel() {
 
-class MainViewModelFactory(private val resourcesProvider: ResourcesProvider) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return MainViewModel(resourcesProvider) as T
+        private val _financeItems = MutableLiveData<FinanceResult<List<FinanceItemHomePresentation>>>()
+        val financeItems = _financeItems
+
+        fun fetchItemsToHome() {
+            _financeItems.postValue(FinanceResult.Loading)
+
+            viewModelScope.launch(Dispatchers.IO) {
+                delay(3000)
+                try {
+                    val presentation = mutableListOf<FinanceItemHomePresentation>()
+
+                    for (type in FinanceType.entries) {
+                        val total = repository.getTotalValueByType(type)
+                        if (type == FinanceType.Balance) {
+                            val totalIncome = repository.getTotalValueByType(FinanceType.Income)
+                            val totalExpense = repository.getTotalValueByType(FinanceType.Expense)
+                            val balance = (totalIncome - totalExpense).toMoney()
+                            presentation.add(
+                                FinanceItemHomePresentation(
+                                    title = type.title,
+                                    balance = balance,
+                                    textColor = type.toPresentation().getColor(resourcesProvider),
+                                    type = type
+                                )
+                            )
+                        } else {
+                            presentation.add(
+                                FinanceItemHomePresentation(
+                                    title = type.title,
+                                    balance = total.toMoney(),
+                                    textColor = type.toPresentation().getColor(resourcesProvider),
+                                    type = type
+                                )
+                            )
+                        }
+                    }
+
+                    _financeItems.postValue(FinanceResult.Success(data = presentation))
+                } catch (e: Exception) {
+                    _financeItems.postValue(FinanceResult.Error(e))
+                }
+            }
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
-}
+    class MainViewModelFactory(
+        private val repository: FinanceItemRepository,
+        private val resourcesProvider: ResourcesProvider
+    ) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return MainViewModel(repository, resourcesProvider) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
+    }
+

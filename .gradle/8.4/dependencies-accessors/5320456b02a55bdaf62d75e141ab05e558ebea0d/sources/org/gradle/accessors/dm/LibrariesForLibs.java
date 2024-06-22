@@ -23,6 +23,7 @@ public class LibrariesForLibs extends AbstractExternalDependencyFactory {
 
     private final AbstractExternalDependencyFactory owner = this;
     private final AndroidxLibraryAccessors laccForAndroidxLibraryAccessors = new AndroidxLibraryAccessors(owner);
+    private final JavaxLibraryAccessors laccForJavaxLibraryAccessors = new JavaxLibraryAccessors(owner);
     private final VersionAccessors vaccForVersionAccessors = new VersionAccessors(providers, config);
     private final BundleAccessors baccForBundleAccessors = new BundleAccessors(objects, providers, config, attributesFactory, capabilityNotationParser);
     private final PluginAccessors paccForPluginAccessors = new PluginAccessors(providers, config);
@@ -53,6 +54,13 @@ public class LibrariesForLibs extends AbstractExternalDependencyFactory {
      */
     public AndroidxLibraryAccessors getAndroidx() {
         return laccForAndroidxLibraryAccessors;
+    }
+
+    /**
+     * Returns the group of libraries at javax
+     */
+    public JavaxLibraryAccessors getJavax() {
+        return laccForJavaxLibraryAccessors;
     }
 
     /**
@@ -158,6 +166,20 @@ public class LibrariesForLibs extends AbstractExternalDependencyFactory {
 
     }
 
+    public static class JavaxLibraryAccessors extends SubDependencyFactory {
+
+        public JavaxLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+            /**
+             * Creates a dependency provider for inject (javax.inject:javax.inject)
+             * This dependency was declared in catalog libs.versions.toml
+             */
+            public Provider<MinimalExternalModuleDependency> getInject() {
+                return create("javax.inject");
+        }
+
+    }
+
     public static class VersionAccessors extends VersionFactory  {
 
         public VersionAccessors(ProviderFactory providers, DefaultVersionCatalog config) { super(providers, config); }
@@ -209,6 +231,14 @@ public class LibrariesForLibs extends AbstractExternalDependencyFactory {
              * This version was declared in catalog libs.versions.toml
              */
             public Provider<String> getEspressoCore() { return getVersion("espressoCore"); }
+
+            /**
+             * Returns the version associated to this alias: javaxInject (1)
+             * If the version is a rich version and that its not expressible as a
+             * single version string, then an empty string is returned.
+             * This version was declared in catalog libs.versions.toml
+             */
+            public Provider<String> getJavaxInject() { return getVersion("javaxInject"); }
 
             /**
              * Returns the version associated to this alias: junit (4.13.2)

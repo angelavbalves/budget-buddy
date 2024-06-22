@@ -8,17 +8,43 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="addItem">
+                  <entry key="addItemDetailsFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="9" />
-                            <option name="y" value="-165" />
+                            <option name="x" value="225" />
+                            <option name="y" value="-240" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_addItemDetailsFragment_to_listActivity">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="addItemFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-85" />
+                            <option name="y" value="-308" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_addItem_to_addItemDetails">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_addItem_to_financeHomeFragment">
                               <value>
                                 <LayoutPositions />
@@ -34,18 +60,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
+                            <option name="x" value="-275" />
+                            <option name="y" value="39" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_financeHomeFragment_to_add_item">
+                            <entry key="action_financeHomeFragment_to_listDetailsActivity">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_financeHomeFragment_to_listDetailsActivity">
+                            <entry key="action_homeFragment_to_addItemFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -60,8 +86,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-345" />
-                            <option name="y" value="-503" />
+                            <option name="x" value="-604" />
+                            <option name="y" value="-371" />
                           </Point>
                         </option>
                       </LayoutPositions>

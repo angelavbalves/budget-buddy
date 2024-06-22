@@ -12,9 +12,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:background="@color/white"
             app:cardBackgroundColor="@{financeCard.textColor}"
             app:cardCornerRadius="12dp"
-            app:cardElevation="90dp"
+            app:cardElevation="4dp"
             app:contentPadding="12dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout

@@ -11,11 +11,12 @@ enum class FinanceTypePresentation(
     @ColorRes val colorResId: Int,
     @DrawableRes val iconResId: Int?
 ) {
-    Balance("Balanço Total", R.color.blue, null),
+    Balance("Balanço", R.color.blue, null),
     Income("Receitas", R.color.green, R.drawable.cash_in),
     Expense("Despesas", R.color.red, R.drawable.cash_out),
     Investment("Investimentos", R.color.pink, R.drawable.invest),
-    FutureExpense("Gastos Futuros", R.color.purple, R.drawable.future_expense);
+    FutureExpense("Gastos Futuros", R.color.purple, R.drawable.future_expense),
+    Unknown("Desconhecido", R.color.black, null);
 
     fun getColor(resourcesProvider: ResourcesProvider): Int {
         return resourcesProvider.getColor(colorResId)

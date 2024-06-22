@@ -14,4 +14,8 @@ fun FinanceItemHome.toPresentation(resourcesProvider: ResourcesProvider): Financ
     )
 }
 
-fun Double.toMoney() = "R$ ${this}"
+fun Double?.toMoney(): String {
+    return this?.let {
+        "R$ %.2f".format(it).replace(".", ",")
+    } ?: "R$0,00"
+}

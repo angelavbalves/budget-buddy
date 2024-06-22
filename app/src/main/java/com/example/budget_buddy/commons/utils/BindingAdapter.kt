@@ -1,4 +1,4 @@
-package com.example.budget_buddy.presentation.bindingadapters
+package com.example.budget_buddy.commons.utils
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
